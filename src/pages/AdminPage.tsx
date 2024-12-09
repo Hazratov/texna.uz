@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 
 const AdminPage = () => {
@@ -15,10 +16,16 @@ const AdminPage = () => {
     image: "",
   });
 
+  const categories = [
+    { value: "smartphones", label: "Smartfonlar" },
+    { value: "computers", label: "Kompyuterlar" },
+    { value: "software", label: "Dasturiy ta'minot" },
+  ];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would typically send the data to your backend
-    console.log("Post data:", formData);
+    console.log("Post data:", { ...formData, createdAt: new Date().toISOString() });
     toast.success("Maqola muvaffaqiyatli saqlandi!");
     setFormData({
       title: "",
@@ -36,6 +43,13 @@ const AdminPage = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+    }));
+  };
+
+  const handleCategoryChange = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      category: value,
     }));
   };
 
@@ -74,12 +88,21 @@ const AdminPage = () => {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Kategoriya
               </label>
-              <Input
-                name="category"
+              <Select
                 value={formData.category}
-                onChange={handleChange}
-                required
-              />
+                onValueChange={handleCategoryChange}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Kategoriyani tanlang" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((category) => (
+                    <SelectItem key={category.value} value={category.value}>
+                      {category.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">

@@ -14,6 +14,7 @@ const AdminPage = () => {
     content: "",
     category: "",
     image: "",
+    source: "",
   });
 
   const categories = [
@@ -24,15 +25,29 @@ const AdminPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log("Post data:", { ...formData, createdAt: new Date().toISOString() });
+    
+    // Create a new article object
+    const newArticle = {
+      ...formData,
+      createdAt: new Date().toISOString(),
+      slug: formData.title.toLowerCase().replace(/ /g, '-')
+    };
+
+    // In a real application, you would send this to your backend
+    // For now, we'll just log it and show a success message
+    console.log("New article:", newArticle);
+    
+    // Show success message
     toast.success("Maqola muvaffaqiyatli saqlandi!");
+    
+    // Reset form
     setFormData({
       title: "",
       excerpt: "",
       content: "",
       category: "",
       image: "",
+      source: "",
     });
   };
 
@@ -111,6 +126,17 @@ const AdminPage = () => {
               <Input
                 name="image"
                 value={formData.image}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Manba
+              </label>
+              <Input
+                name="source"
+                value={formData.source}
                 onChange={handleChange}
                 required
               />

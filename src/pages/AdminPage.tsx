@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -6,8 +7,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const AdminPage = () => {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginForm, setLoginForm] = useState({
+    username: "",
+    password: "",
+  });
   const [formData, setFormData] = useState({
     title: "",
     excerpt: "",
@@ -23,32 +31,53 @@ const AdminPage = () => {
     { value: "software", label: "Dasturiy ta'minot" },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const { data, error } = await supabase
+        .from('admin_users')
+        .select()
+        .eq('username', loginForm.username)
+        .eq('password', loginForm.password)
+        .single();
+
+      if (error) throw error;
+
+      if (data) {
+        setIsLoggedIn(true);
+        toast.success("Muvaffaqiyatli kirdingiz!");
+      } else {
+        toast.error("Login yoki parol noto'g'ri!");
+      }
+    } catch (error) {
+      toast.error("Xatolik yuz berdi!");
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Create a new article object
-    const newArticle = {
-      ...formData,
-      createdAt: new Date().toISOString(),
-      slug: formData.title.toLowerCase().replace(/ /g, '-')
-    };
+    try {
+      const slug = formData.title.toLowerCase().replace(/ /g, '-');
+      const { error } = await supabase
+        .from('articles')
+        .insert([{ ...formData, slug }]);
 
-    // In a real application, you would send this to your backend
-    // For now, we'll just log it and show a success message
-    console.log("New article:", newArticle);
-    
-    // Show success message
-    toast.success("Maqola muvaffaqiyatli saqlandi!");
-    
-    // Reset form
-    setFormData({
-      title: "",
-      excerpt: "",
-      content: "",
-      category: "",
-      image: "",
-      source: "",
-    });
+      if (error) throw error;
+      
+      toast.success("Maqola muvaffaqiyatli saqlandi!");
+      
+      setFormData({
+        title: "",
+        excerpt: "",
+        content: "",
+        category: "",
+        image: "",
+        source: "",
+      });
+    } catch (error) {
+      toast.error("Xatolik yuz berdi!");
+    }
   };
 
   const handleChange = (
@@ -61,6 +90,16 @@ const AdminPage = () => {
     }));
   };
 
+  const handleLoginChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+    setLoginForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const handleCategoryChange = (value: string) => {
     setFormData((prev) => ({
       ...prev,
@@ -68,14 +107,64 @@ const AdminPage = () => {
     }));
   };
 
+  if (!isLoggedIn) {
+    return (
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        <Navbar />
+        <main className="flex-grow flex items-center justify-center">
+          <div className="max-w-md w-full mx-4">
+            <h1 className="text-2xl font-bold text-center mb-8">Admin panelga kirish</h1>
+            <form onSubmit={handleLogin} className="space-y-4 bg-white p-6 rounded-lg shadow">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Username
+                </label>
+                <Input
+                  name="username"
+                  value={loginForm.username}
+                  onChange={handleLoginChange}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Password
+                </label>
+                <Input
+                  type="password"
+                  name="password"
+                  value={loginForm.password}
+                  onChange={handleLoginChange}
+                  required
+                />
+              </div>
+              <Button type="submit" className="w-full">
+                Kirish
+              </Button>
+            </form>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
       <main className="flex-grow">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">
-            Yangi maqola yaratish
-          </h1>
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">
+              Yangi maqola yaratish
+            </h1>
+            <Button 
+              variant="outline"
+              onClick={() => setIsLoggedIn(false)}
+            >
+              Chiqish
+            </Button>
+          </div>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -138,7 +227,6 @@ const AdminPage = () => {
                 name="source"
                 value={formData.source}
                 onChange={handleChange}
-                required
               />
             </div>
             <div>

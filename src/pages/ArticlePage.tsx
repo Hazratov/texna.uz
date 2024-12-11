@@ -13,6 +13,8 @@ interface Article {
   category: string;
   source?: string;
   created_at: string;
+  slug: string;  // Added missing property
+  excerpt: string;  // Added missing property
 }
 
 const ArticlePage = () => {

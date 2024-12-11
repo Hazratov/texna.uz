@@ -45,6 +45,10 @@ export function ArticleForm() {
       toast.error("Maqola matni kiritilishi shart!");
       return false;
     }
+    if (formData.content.length < 200) {
+      toast.error("Maqola matni kamida 200 ta belgidan iborat bo'lishi kerak!");
+      return false;
+    }
     if (!formData.category) {
       toast.error("Kategoriya tanlanishi shart!");
       return false;
@@ -53,6 +57,15 @@ export function ArticleForm() {
       toast.error("Rasm URL manzili kiritilishi shart!");
       return false;
     }
+
+    // Validate image URL
+    try {
+      new URL(formData.image);
+    } catch {
+      toast.error("Noto'g'ri rasm URL manzili!");
+      return false;
+    }
+    
     return true;
   };
 
@@ -179,6 +192,9 @@ export function ArticleForm() {
           placeholder="Rasmning to'liq URL manzili"
           disabled={isSubmitting}
         />
+        <p className="mt-1 text-sm text-gray-500">
+          Masalan: https://example.com/image.jpg
+        </p>
       </div>
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -194,7 +210,7 @@ export function ArticleForm() {
       </div>
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Maqola matni
+          Maqola matni (kamida 200 ta belgi)
         </label>
         <Textarea
           name="content"
@@ -204,6 +220,9 @@ export function ArticleForm() {
           placeholder="Maqolaning to'liq matni"
           disabled={isSubmitting}
         />
+        <p className="mt-1 text-sm text-gray-500">
+          Belgilar soni: {formData.content.length}/200
+        </p>
       </div>
       <Button type="submit" className="w-full" disabled={isSubmitting}>
         {isSubmitting ? "Saqlanmoqda..." : "Maqolani saqlash"}

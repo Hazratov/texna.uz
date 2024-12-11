@@ -21,18 +21,6 @@ const Index = () => {
   const { category } = useParams();
   const location = useLocation();
   const [articles, setArticles] = useState<Article[]>([]);
-  const [comments, setComments] = useState<Array<{ author: string; text: string; date: string }>>([
-    {
-      author: "Aziz",
-      text: "Juda foydali maqola, rahmat!",
-      date: "2024-03-20"
-    },
-    {
-      author: "Dilshod",
-      text: "Yangiliklar uchun rahmat",
-      date: "2024-03-19"
-    }
-  ]);
 
   useEffect(() => {
     fetchArticles();
@@ -87,21 +75,6 @@ const Index = () => {
   // Featured article will be the most recent article
   const featuredArticle = latestArticles[0] || articles[0];
 
-  const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const author = (form.elements.namedItem('author') as HTMLInputElement).value;
-    const text = (form.elements.namedItem('comment') as HTMLTextAreaElement).value;
-    
-    setComments(prev => [...prev, {
-      author,
-      text,
-      date: new Date().toISOString().split('T')[0]
-    }]);
-    
-    form.reset();
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
@@ -127,64 +100,12 @@ const Index = () => {
           <h2 className="text-2xl font-bold mb-6">
             {category ? `${category.charAt(0).toUpperCase() + category.slice(1)} bo'yicha maqolalar` : "Barcha maqolalar"}
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {articles
               .filter(article => !category || article.category === category)
               .map((article) => (
                 <ArticleCard key={article.id} {...article} />
               ))}
-          </div>
-
-          {/* Comments section */}
-          <div className="bg-white rounded-xl p-6 shadow-sm">
-            <h2 className="text-2xl font-bold mb-6">Sharhlar va maslahatlar</h2>
-            
-            {/* Comment form */}
-            <form onSubmit={handleCommentSubmit} className="mb-8">
-              <div className="mb-4">
-                <label htmlFor="author" className="block text-sm font-medium text-gray-700 mb-1">
-                  Ismingiz
-                </label>
-                <input
-                  type="text"
-                  id="author"
-                  name="author"
-                  required
-                  className="w-full px-4 py-2 border rounded-md"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="comment" className="block text-sm font-medium text-gray-700 mb-1">
-                  Izoh
-                </label>
-                <textarea
-                  id="comment"
-                  name="comment"
-                  required
-                  rows={4}
-                  className="w-full px-4 py-2 border rounded-md"
-                />
-              </div>
-              <button
-                type="submit"
-                className="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/90"
-              >
-                Yuborish
-              </button>
-            </form>
-
-            {/* Comments list */}
-            <div className="space-y-4">
-              {comments.map((comment, index) => (
-                <div key={index} className="border-b pb-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold">{comment.author}</h3>
-                    <span className="text-sm text-gray-500">{comment.date}</span>
-                  </div>
-                  <p className="text-gray-600">{comment.text}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </main>

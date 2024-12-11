@@ -13,6 +13,7 @@ const categories = [
 ];
 
 export function ArticleForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     excerpt: "",
@@ -22,21 +23,59 @@ export function ArticleForm() {
     source: "",
   });
 
+  const generateSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim();
+  };
+
+  const validateForm = () => {
+    if (!formData.title) {
+      toast.error("Sarlavha kiritilishi shart!");
+      return false;
+    }
+    if (!formData.excerpt) {
+      toast.error("Qisqa matn kiritilishi shart!");
+      return false;
+    }
+    if (!formData.content) {
+      toast.error("Maqola matni kiritilishi shart!");
+      return false;
+    }
+    if (!formData.category) {
+      toast.error("Kategoriya tanlanishi shart!");
+      return false;
+    }
+    if (!formData.image) {
+      toast.error("Rasm URL manzili kiritilishi shart!");
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    try {
-      // Sarlavhadan slug yaratish
-      const slug = formData.title
-        .toLowerCase()
-        .replace(/[^a-z0-9\s-]/g, '') // Faqat harflar, raqamlar va chiziqchalarni qoldirish
-        .replace(/\s+/g, '-') // Bo'shliqlarni chiziqchaga almashtirish
-        .replace(/-+/g, '-') // Ketma-ket kelgan chiziqchalarni bitta qilish
-        .trim(); // Boshi va oxiridagi bo'shliqlarni olib tashlash
+    if (!validateForm()) return;
 
-      // Ma'lumotlarni tekshirish
-      if (!formData.title || !formData.excerpt || !formData.content || !formData.category || !formData.image) {
-        toast.error("Barcha maydonlarni to'ldiring!");
+    setIsSubmitting(true);
+    
+    try {
+      const slug = generateSlug(formData.title);
+
+      // Check if slug already exists
+      const { data: existingArticle } = await supabase
+        .from('articles')
+        .select('slug')
+        .eq('slug', slug)
+        .single();
+
+      if (existingArticle) {
+        toast.error("Bu sarlavha bilan maqola mavjud. Iltimos, boshqa sarlavha tanlang.");
+        setIsSubmitting(false);
         return;
       }
 
@@ -60,6 +99,8 @@ export function ArticleForm() {
     } catch (error) {
       console.error('Error:', error);
       toast.error("Xatolik yuz berdi! Qaytadan urinib ko'ring.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -90,8 +131,8 @@ export function ArticleForm() {
           name="title"
           value={formData.title}
           onChange={handleChange}
-          required
           placeholder="Maqola sarlavhasi"
+          disabled={isSubmitting}
         />
       </div>
       <div>
@@ -102,8 +143,8 @@ export function ArticleForm() {
           name="excerpt"
           value={formData.excerpt}
           onChange={handleChange}
-          required
           placeholder="Maqola haqida qisqacha ma'lumot"
+          disabled={isSubmitting}
         />
       </div>
       <div>
@@ -113,6 +154,7 @@ export function ArticleForm() {
         <Select
           value={formData.category}
           onValueChange={handleCategoryChange}
+          disabled={isSubmitting}
         >
           <SelectTrigger>
             <SelectValue placeholder="Kategoriyani tanlang" />
@@ -134,8 +176,8 @@ export function ArticleForm() {
           name="image"
           value={formData.image}
           onChange={handleChange}
-          required
           placeholder="Rasmning to'liq URL manzili"
+          disabled={isSubmitting}
         />
       </div>
       <div>
@@ -147,6 +189,7 @@ export function ArticleForm() {
           value={formData.source}
           onChange={handleChange}
           placeholder="Maqola manbasi (ixtiyoriy)"
+          disabled={isSubmitting}
         />
       </div>
       <div>
@@ -157,13 +200,13 @@ export function ArticleForm() {
           name="content"
           value={formData.content}
           onChange={handleChange}
-          required
           className="h-64"
           placeholder="Maqolaning to'liq matni"
+          disabled={isSubmitting}
         />
       </div>
-      <Button type="submit" className="w-full">
-        Maqolani saqlash
+      <Button type="submit" className="w-full" disabled={isSubmitting}>
+        {isSubmitting ? "Saqlanmoqda..." : "Maqolani saqlash"}
       </Button>
     </form>
   );

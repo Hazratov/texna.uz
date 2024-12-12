@@ -34,52 +34,207 @@ const ArticlePage = () => {
 
         if (error) throw error;
         
-        // If no data found, set default content for iPhone 15 Pro Max
-        if (!data && slug === 'iphone-15-pro-max-sharhi') {
-          setArticle({
-            title: "iPhone 15 Pro Max yangi A17 Pro protsessori bilan",
-            content: `Apple kompaniyasi o'zining eng so'nggi flagman smartfoni - iPhone 15 Pro Max modelini taqdim etdi. Bu qurilma mobil texnologiyalar sohasida yangi standartlarni o'rnatmoqda.
+        // Default content for different categories
+        if (!data) {
+          if (slug === 'macbook-pro-16-2024') {
+            setArticle({
+              title: "MacBook Pro 16 2024 - Professional darajadagi noutbuk",
+              content: `Apple kompaniyasi o'zining eng so'nggi MacBook Pro 16 modelini taqdim etdi. Bu qurilma professional foydalanuvchilar uchun mo'ljallangan bo'lib, yuqori unumdorlik va mukammal dizaynni o'zida mujassam etgan.
 
-A17 Pro protsessori haqida batafsil ma'lumot:
-• 3 nanometrli texnologiya asosida ishlab chiqarilgan
-• 6 yadroli protsessor (2 ta yuqori unumli va 4 ta energiya tejamkor yadrolar)
-• 16 yadroli neyron tizimi
-• Professional darajadagi grafik tizim
-• Konsol o'yinlari sifatidagi grafikani qo'llab-quvvatlash
-
-Kamera tizimi:
-• 48 MP asosiy kamera, yangilangan sensor
-• 12 MP ultra keng burchakli kamera
-• 12 MP telephoto kamera, 5x optik zum
-• LiDAR skaner chuqurlik sezish uchun
-• ProRAW va ProRes video yozish imkoniyati
+Protsessor va xotira:
+• M3 Pro/Max protsessori - 12-yadroli CPU, 38-yadroli GPU
+• 32 GB dan 128 GB gacha tezkor xotira
+• 512 GB dan 8 TB gacha SSD xotira
+• ProRes tezlatgichi va Media Engine
 
 Displey xususiyatlari:
-• 6.7 dyumli Super Retina XDR OLED ekran
-• ProMotion texnologiyasi (1-120 Gz)
-• Always-On Display funksiyasi
-• HDR10 va Dolby Vision qo'llab-quvvatlash
+• 16.2 dyumli Liquid Retina XDR displey
+• 3456 x 2234 piksel o'lchamli ekran
+• ProMotion texnologiyasi (120 Gts)
+• True Tone va P3 rang gamuti
+• HDR kontenti uchun 1600 nit maksimal yorqinlik
+• Mini-LED orqa yorug'lik
+
+Ulanish imkoniyatlari:
+• 3 ta Thunderbolt 4 (USB-C) port
+• HDMI 2.1 porti
+• SDXC kart o'quvchisi
+• MagSafe 3 quvvatlash porti
+• Wi-Fi 6E va Bluetooth 5.3
+
+Audio tizimi:
+• 6 ta yuqori safarli dinamiklar
+• Studio sifatidagi mikrofonlar
+• 3.5mm audio port professional qurilmalar uchun
 
 Batareya va quvvatlash:
-• Kunlik foydalanish uchun mo'ljallangan batareya quvvati
-• Tez quvvatlash imkoniyati (20W)
-• MagSafe simsiz quvvatlash (15W)
-• Qi simsiz quvvatlash (7.5W)
+• 100 Wh sig'imli batareya
+• 22 soatgacha video ko'rish
+• 140W tez quvvatlash adapteri
 
-Xavfsizlik va himoya:
-• Face ID texnologiyasi
-• Titanli korpus
-• Ceramic Shield himoya oynasi
-• IP68 suv va changdan himoya darajasi
+Xavfsizlik:
+• Touch ID skaneri
+• Apple T2 xavfsizlik chipi
+• FileVault ma'lumotlarni shifrlash
 
-Yangi iPhone 15 Pro Max smartfoni professional foydalanuvchilar uchun mo'ljallangan bo'lib, u yuqori unumdorlik, professional darajadagi kamera tizimi va premium materiallardan tayyorlangan dizaynni o'zida mujassam etgan.`,
-            image: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-            category: "smartphones",
-            source: "Apple",
-            created_at: "2024-03-11T00:00:00Z",
-            slug: "iphone-15-pro-max-sharhi",
-            excerpt: "Apple kompaniyasining eng so'nggi flagman smartfoni iPhone 15 Pro Max modeli haqida batafsil ma'lumot"
-          });
+Qo'shimcha xususiyatlar:
+• Force Touch trekped
+• Magic Keyboard to'liq o'lchamli
+• 1080p FaceTime HD kamera
+• macOS Sonoma operatsion tizimi
+
+Bu MacBook Pro modeli kreativ mutaxassislar, dasturchilar va video montajchilar uchun ideal tanlov bo'lib, yuqori unumdorlik va professional darajadagi imkoniyatlarni taqdim etadi. Qurilmaning sovutish tizimi takomillashtirilgan bo'lib, yuqori yuklamalarda ham barqaror ishlashni ta'minlaydi.`,
+              image: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
+              category: "computers",
+              source: "Apple",
+              created_at: new Date().toISOString(),
+              slug: "macbook-pro-16-2024",
+              excerpt: "Apple kompaniyasining eng so'nggi MacBook Pro 16 modeli haqida batafsil ma'lumot"
+            });
+          } else if (slug === 'visual-studio-code-2024') {
+            setArticle({
+              title: "Visual Studio Code 2024 - Zamonaviy kod muharriri",
+              content: `Microsoft tomonidan ishlab chiqilgan Visual Studio Code (VS Code) - bu zamonaviy dasturchilar uchun eng ommabop va qulay kod muharriri hisoblanadi. 2024-yilgi yangilanish yanada ko'proq imkoniyatlarni taqdim etmoqda.
+
+Asosiy xususiyatlar:
+• Ko'p platformali qo'llab-quvvatlash (Windows, macOS, Linux)
+• Intellisense code completion tizimi
+• Live Share hamkorlikdagi dasturlash
+• Git integratsiyasi
+• Debug qilish vositalari
+• Terminal integratsiyasi
+• Kengaytirilgan kengaytmalar tizimi
+
+Yangi qo'shilgan imkoniyatlar:
+• AI-powered coding assistants
+• Remote development
+• Workspace trust
+• Timeline view
+• Settings sync
+• Semantic highlighting
+
+Qo'llab-quvvatlanadigan dasturlash tillari:
+• JavaScript va TypeScript
+• Python
+• Java
+• C va C++
+• PHP
+• Go
+• Ruby
+• Rust
+• Va boshqa ko'plab tillar
+
+Maxsus xususiyatlar:
+• GitHub Copilot integratsiyasi
+• Docker konteynerlar bilan ishlash
+• WSL (Windows Subsystem for Linux) qo'llab-quvvatlash
+• Jupyter Notebooks integratsiyasi
+• Azure integratsiyasi
+
+Interfeys va foydalanish qulayligi:
+• Mavzular va ranglar sozlash
+• Keyboard shortcuts sozlash
+• Snippets yaratish
+• Multi-cursor tahrirlash
+• Minimap ko'rinishi
+• Zen Mode
+
+Kengaytmalar ekotizimi:
+• 30,000+ kengaytmalar
+• Til paketi va debuggerlar
+• Mavzu va ikonkalar
+• Linting va formatting tools
+• Test framework integratsiyasi
+
+Performance optimizatsiyasi:
+• Startup time yaxshilangan
+• Memory usage optimallashtirilgan
+• Large file handling
+• Search va replace tezligi
+• Extension host isolation
+
+VS Code nafaqat oddiy matn muharriri, balki to'liq IDE sifatida ishlatilishi mumkin bo'lgan kuchli vosita hisoblanadi. U doimiy yangilanib turadi va yangi xususiyatlar qo'shilmoqda, bu esa uni zamonaviy dasturchilar uchun eng yaxshi tanlovlardan biri qiladi.`,
+              image: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
+              category: "software",
+              source: "Microsoft",
+              created_at: new Date().toISOString(),
+              slug: "visual-studio-code-2024",
+              excerpt: "Microsoft Visual Studio Code 2024 yangilangan versiyasi haqida batafsil ma'lumot"
+            });
+          } else if (slug === 'samsung-s24-ultra') {
+            setArticle({
+              title: "Samsung Galaxy S24 Ultra - Yangi avlod flagmani",
+              content: `Samsung kompaniyasi o'zining eng so'nggi flagman smartfoni - Galaxy S24 Ultra modelini taqdim etdi. Bu qurilma AI texnologiyalari va mukammal kamera tizimi bilan jihozlangan.
+
+Protsessor va xotira:
+• Snapdragon 8 Gen 3 protsessori
+• 12 GB tezkor xotira
+• 256/512 GB/1TB ichki xotira
+• UFS 4.0 tezkor xotira
+
+Kamera tizimi:
+• 200 MP asosiy kamera, f/1.7
+• 12 MP ultra keng burchakli
+• 50 MP telephoto (5x optical zoom)
+• 10 MP telephoto (3x optical zoom)
+• 12 MP selfie kamera
+• 8K/30fps video yozish
+• Pro Video mode
+
+Displey:
+• 6.8" Dynamic AMOLED 2X
+• QHD+ (3088 x 1440) o'lcham
+• 1-120 Hz yangilanish tezligi
+• HDR10+ va Always-On Display
+• 2600 nit maksimal yorqinlik
+• Gorilla Glass Armor himoya
+
+AI xususiyatlari:
+• Galaxy AI integration
+• Real-time tarjima
+• Chat assist
+• Generative edit
+• Live translate calls
+• Note assist
+
+S Pen xususiyatlari:
+• 2.8ms latency
+• Air commands
+• Screen off memo
+• Samsung Notes integration
+• Handwriting to text
+• PENUP creative tools
+
+Batareya va quvvatlash:
+• 5000 mAh batareya
+• 45W tez quvvatlash
+• 15W simsiz quvvatlash
+• Reverse wireless charging
+
+Xavfsizlik:
+• Ultrasonic fingerprint sensor
+• Samsung Knox
+• Secure folder
+• Private share
+• Maintenance mode
+
+Qo'shimcha xususiyatlar:
+• IP68 suv va changdan himoya
+• Titanium frame
+• UWB texnologiyasi
+• DeX mode
+• Wi-Fi 7
+• 5G support
+
+Samsung Galaxy S24 Ultra smartfoni professional foydalanuvchilar uchun mo'ljallangan bo'lib, u yuqori unumdorlik, professional darajadagi kamera tizimi va AI texnologiyalarini o'zida mujassam etgan. Qurilma titanli ramka va Gorilla Glass Armor himoya oynasi bilan jihozlangan bo'lib, yuqori darajadagi mustahkamlikni ta'minlaydi.`,
+              image: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
+              category: "smartphones",
+              source: "Samsung",
+              created_at: new Date().toISOString(),
+              slug: "samsung-s24-ultra",
+              excerpt: "Samsung Galaxy S24 Ultra flagman smartfoni haqida batafsil ma'lumot"
+            });
+          }
         } else {
           setArticle(data);
         }
@@ -172,49 +327,6 @@ Yangi iPhone 15 Pro Max smartfoni professional foydalanuvchilar uchun mo'ljallan
                 {paragraph}
               </p>
             ))}
-          </div>
-
-          {/* Texnik xususiyatlar va SEO meta-ma'lumotlar */}
-          <div className="mt-8">
-            <Separator className="my-8" />
-            <h2 className="text-2xl font-bold mb-4">Asosiy texnik xususiyatlar</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              {article.category === "smartphones" && (
-                <>
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                    <h3 className="font-semibold mb-2">Protsessor</h3>
-                    <p>A17 Pro, 3nm texnologiya</p>
-                  </div>
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                    <h3 className="font-semibold mb-2">Xotira</h3>
-                    <p>256GB / 512GB / 1TB</p>
-                  </div>
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                    <h3 className="font-semibold mb-2">Ekran</h3>
-                    <p>6.7" Super Retina XDR OLED</p>
-                  </div>
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                    <h3 className="font-semibold mb-2">Asosiy kamera</h3>
-                    <p>48MP + 12MP + 12MP</p>
-                  </div>
-                </>
-              )}
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {article.category === "smartphones" && (
-                <>
-                  <span className="text-xs bg-gray-100 px-2 py-1 rounded">iPhone 15 Pro Max</span>
-                  <span className="text-xs bg-gray-100 px-2 py-1 rounded">A17 Pro protsessor</span>
-                  <span className="text-xs bg-gray-100 px-2 py-1 rounded">Apple yangi telefon</span>
-                  <span className="text-xs bg-gray-100 px-2 py-1 rounded">Pro kameralar</span>
-                  <span className="text-xs bg-gray-100 px-2 py-1 rounded">iOS 17</span>
-                  <span className="text-xs bg-gray-100 px-2 py-1 rounded">5G qo'llab-quvvatlash</span>
-                  <span className="text-xs bg-gray-100 px-2 py-1 rounded">ProMotion ekran</span>
-                  <span className="text-xs bg-gray-100 px-2 py-1 rounded">MagSafe</span>
-                </>
-              )}
-            </div>
           </div>
 
           {/* O'xshash maqolalar */}

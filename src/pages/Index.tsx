@@ -17,29 +17,65 @@ interface Article {
   created_at: string;
 }
 
-// Category-specific placeholder images
+// Category-specific placeholder images with more options
 const categoryImages = {
   smartphones: [
-    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-    "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
-    "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+    "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd",
+    "https://images.unsplash.com/photo-1598327105666-5b89351aff97",
+    "https://images.unsplash.com/photo-1585060544812-6b45742d762f",
+    "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb",
+    "https://images.unsplash.com/photo-1567581935884-3349723552ca",
+    "https://images.unsplash.com/photo-1523206489230-c012c64b2b48"
   ],
   computers: [
-    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
-    "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-    "https://images.unsplash.com/photo-1605810230434-7631ac76ec81"
+    "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+    "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
+    "https://images.unsplash.com/photo-1537498425277-c283d32ef9db",
+    "https://images.unsplash.com/photo-1547082299-de196ea013d6",
+    "https://images.unsplash.com/photo-1593640495253-23196b27a87f",
+    "https://images.unsplash.com/photo-1602080858428-57174f9431cf",
+    "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed"
   ],
   software: [
-    "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
-    "https://images.unsplash.com/photo-1497604401993-f2e922e5cb0a",
-    "https://images.unsplash.com/photo-1518005020951-eccb494ad742"
+    "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
+    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+    "https://images.unsplash.com/photo-1516116216624-53e697fedbea",
+    "https://images.unsplash.com/photo-1504639725590-34d0984388bd",
+    "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2",
+    "https://images.unsplash.com/photo-1623479322729-28b25c16b011",
+    "https://images.unsplash.com/photo-1607799279861-4dd421887fb3"
   ]
+};
+
+// Keep track of used images per category
+const usedImages: { [key: string]: Set<string> } = {
+  smartphones: new Set(),
+  computers: new Set(),
+  software: new Set()
 };
 
 const getRandomImageForCategory = (category: string) => {
   const images = categoryImages[category as keyof typeof categoryImages] || categoryImages.software;
-  const randomIndex = Math.floor(Math.random() * images.length);
-  return images[randomIndex];
+  const usedImagesForCategory = usedImages[category] || new Set();
+
+  // Reset used images if all images for this category have been used
+  if (usedImagesForCategory.size >= images.length) {
+    usedImagesForCategory.clear();
+  }
+
+  // Filter out already used images
+  const availableImages = images.filter(img => !usedImagesForCategory.has(img));
+  
+  // Get random image from available images
+  const randomIndex = Math.floor(Math.random() * availableImages.length);
+  const selectedImage = availableImages[randomIndex];
+  
+  // Mark image as used
+  usedImagesForCategory.add(selectedImage);
+  usedImages[category] = usedImagesForCategory;
+
+  return selectedImage;
 };
 
 const Index = () => {
@@ -84,7 +120,10 @@ const Index = () => {
       
       if (error) throw error;
       
-      // Assign random category-specific images to articles
+      // Reset used images when fetching new articles
+      Object.values(usedImages).forEach(set => set.clear());
+      
+      // Assign unique random category-specific images to articles
       const articlesWithImages = (data || []).map(article => ({
         ...article,
         image: getRandomImageForCategory(article.category)

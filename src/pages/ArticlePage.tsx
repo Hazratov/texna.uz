@@ -3,8 +3,11 @@ import { useParams } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
-import { Separator } from "@/components/ui/separator";
-import { Card, CardContent } from "@/components/ui/card";
+import { ArticleHeader } from "@/components/article/ArticleHeader";
+import { ArticleImage } from "@/components/article/ArticleImage";
+import { RelatedArticles } from "@/components/article/RelatedArticles";
+import { SeasonalBackground } from "@/components/article/SeasonalBackground";
+import "../styles/seasonal.css";
 
 interface Article {
   title: string;
@@ -81,9 +84,7 @@ Qo'shimcha xususiyatlar:
 • Force Touch trekped
 • Magic Keyboard to'liq o'lchamli
 • 1080p FaceTime HD kamera
-• macOS Sonoma operatsion tizimi
-
-Bu MacBook Pro modeli kreativ mutaxassislar, dasturchilar va video montajchilar uchun ideal tanlov bo'lib, yuqori unumdorlik va professional darajadagi imkoniyatlarni taqdim etadi. Qurilmaning sovutish tizimi takomillashtirilgan bo'lib, yuqori yuklamalarda ham barqaror ishlashni ta'minlaydi.`,
+• macOS Sonoma operatsion tizimi`,
               image: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
               category: "computers",
               source: "Apple",
@@ -151,9 +152,7 @@ Performance optimizatsiyasi:
 • Memory usage optimallashtirilgan
 • Large file handling
 • Search va replace tezligi
-• Extension host isolation
-
-VS Code nafaqat oddiy matn muharriri, balki to'liq IDE sifatida ishlatilishi mumkin bo'lgan kuchli vosita hisoblanadi. U doimiy yangilanib turadi va yangi xususiyatlar qo'shilmoqda, bu esa uni zamonaviy dasturchilar uchun eng yaxshi tanlovlardan biri qiladi.`,
+• Extension host isolation`,
               image: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
               category: "software",
               source: "Microsoft",
@@ -224,9 +223,7 @@ Qo'shimcha xususiyatlar:
 • UWB texnologiyasi
 • DeX mode
 • Wi-Fi 7
-• 5G support
-
-Samsung Galaxy S24 Ultra smartfoni professional foydalanuvchilar uchun mo'ljallangan bo'lib, u yuqori unumdorlik, professional darajadagi kamera tizimi va AI texnologiyalarini o'zida mujassam etgan. Qurilma titanli ramka va Gorilla Glass Armor himoya oynasi bilan jihozlangan bo'lib, yuqori darajadagi mustahkamlikni ta'minlaydi.`,
+• 5G support`,
               image: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
               category: "smartphones",
               source: "Samsung",
@@ -285,42 +282,18 @@ Samsung Galaxy S24 Ultra smartfoni professional foydalanuvchilar uchun mo'ljalla
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-gray-50 relative">
+      <SeasonalBackground />
       <Navbar />
-      <main className="flex-grow">
-        <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="mb-8">
-            <span className="text-sm font-medium text-primary uppercase tracking-wider">
-              {article.category === "smartphones" ? "Smartfonlar" :
-               article.category === "computers" ? "Kompyuterlar" :
-               "Dasturiy ta'minot"}
-            </span>
-            <h1 className="mt-2 text-4xl font-bold text-gray-900">{article.title}</h1>
-            <div className="mt-4 flex items-center text-gray-500 text-sm">
-              <time dateTime={article.created_at}>
-                {new Date(article.created_at).toLocaleDateString('uz-UZ', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </time>
-              {article.source && (
-                <>
-                  <span className="mx-2">•</span>
-                  <span>Manba: {article.source}</span>
-                </>
-              )}
-            </div>
-          </div>
-
-          <div className="relative h-[400px] rounded-xl overflow-hidden mb-8">
-            <img
-              src={article.image}
-              alt={article.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
-
+      <main className="flex-grow relative z-10">
+        <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg">
+          <ArticleHeader
+            title={article.title}
+            category={article.category}
+            created_at={article.created_at}
+            source={article.source}
+          />
+          <ArticleImage image={article.image} title={article.title} />
           <div className="prose prose-lg max-w-none">
             {article.content.split('\n').map((paragraph, index) => (
               <p key={index} className="mb-6 text-gray-700 leading-relaxed">
@@ -328,28 +301,7 @@ Samsung Galaxy S24 Ultra smartfoni professional foydalanuvchilar uchun mo'ljalla
               </p>
             ))}
           </div>
-
-          {/* O'xshash maqolalar */}
-          {relatedArticles.length > 0 && (
-            <div className="mt-12">
-              <h2 className="text-2xl font-bold mb-6">O'xshash maqolalar</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {relatedArticles.map((related) => (
-                  <Card key={related.slug} className="hover:shadow-lg transition-shadow">
-                    <CardContent className="p-4">
-                      <img
-                        src={related.image}
-                        alt={related.title}
-                        className="w-full h-48 object-cover rounded-md mb-4"
-                      />
-                      <h3 className="font-semibold text-lg mb-2">{related.title}</h3>
-                      <p className="text-sm text-gray-600">{related.excerpt}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          )}
+          <RelatedArticles articles={relatedArticles} />
         </article>
       </main>
       <Footer />

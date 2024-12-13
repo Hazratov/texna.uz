@@ -6,7 +6,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { ArticleHeader } from "@/components/article/ArticleHeader";
 import { ArticleImage } from "@/components/article/ArticleImage";
 import { RelatedArticles } from "@/components/article/RelatedArticles";
-import { SeasonalBackground } from "@/components/article/SeasonalBackground";
 import "../styles/seasonal.css";
 
 interface Article {

@@ -7,6 +7,21 @@
   }
 }
 
+@keyframes butterfly {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(50px, -50px) rotate(45deg);
+  }
+  50% {
+    transform: translate(0, -100px) rotate(0deg);
+  }
+  75% {
+    transform: translate(-50px, -50px) rotate(-45deg);
+  }
+}
+
 .animate-fall > * {
   animation: fall linear infinite;
 }
@@ -17,4 +32,12 @@
 
 .leaf {
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.petal {
+  filter: blur(0.5px);
+}
+
+.butterfly {
+  transform-origin: center;
 }

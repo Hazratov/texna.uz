@@ -8,9 +8,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-bold mb-4">TexnaUzb</h3>
-            <p className="text-gray-400">
+            <p className="text-gray-400 mb-4">
               O'zbekistondagi eng so'nggi texnologik yangiliklar va sharhlar
             </p>
+            <div className="text-sm text-gray-400">
+              <p className="mb-2">⚡ TexnaUzb — O'zbekistondagi eng katta va ishonchli texnologiyaga oid kanal! 📱💻</p>
+              <p>Texnologik yangiliklar, smartfonlar, kompyuterlar va maslahatlarning barchasi TexnaUzb sahifasida jamlangan.</p>
+            </div>
           </div>
           <div>
             <h3 className="text-xl font-bold mb-4">Asosiy bo'limlar</h3>
@@ -75,8 +79,12 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 TexnaUzb. Barcha huquqlar himoyalangan.</p>
+        <div className="border-t border-gray-800 mt-8 pt-8">
+          <div className="text-sm text-gray-400 mb-4">
+            <p className="mb-2">❗ Shartnoma raqami: 43025-AH №</p>
+            <p>Mualliflik huquqlari himoyalangan bo'lib, barcha materiallar TexnaUzb'ga tegishli. Ushbu sahifadan ruxsatsiz foydalanish yoki materiallarni ko'chirib tarqatish qonuniy javobgarlikka sabab bo'lishi mumkin.</p>
+          </div>
+          <p className="text-center text-gray-400">&copy; 2024 TexnaUzb. Barcha huquqlar himoyalangan.</p>
         </div>
       </div>
     </footer>

@@ -3,6 +3,7 @@ import { FeaturedArticle } from "@/components/FeaturedArticle";
 import { ArticleCard } from "@/components/ArticleCard";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useParams, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -148,6 +149,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
+      <SubscriptionModal />
       <main className="flex-grow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {location.pathname === "/" && featuredArticle && (

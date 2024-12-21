@@ -16,7 +16,7 @@ export function SubscriptionModal() {
   }, []);
 
   const handleChannelClick = () => {
-    window.open("https://t.me/texna_uz", "_blank", "noopener,noreferrer");
+    window.open("https://t.me/texna_uzb", "_blank", "noopener,noreferrer");
     setOpen(false);
   };
 
@@ -25,7 +25,7 @@ export function SubscriptionModal() {
       <DialogContent className="sm:max-w-[425px]">
         <div className="grid gap-4 py-4">
           <h2 className="text-xl font-bold text-center">
-            Texna.uz Kanaliga obuna bo'ling
+            Texna.uz Telegram kanaliga obuna bo'ling
           </h2>
           <p className="text-center text-gray-600">
             Eng so'nggi texnologik yangiliklar va qiziqarli ma'lumotlardan xabardor bo'lish uchun bizning kanalimizga obuna bo'ling!

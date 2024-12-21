@@ -35,8 +35,8 @@ export function Navbar() {
             <Link to="/category/software" className="inline-flex items-center px-1 pt-1 text-sm font-medium text-foreground hover:text-primary">
               Dasturiy ta'minot
             </Link>
-            <Link to="/reviews" className="inline-flex items-center px-1 pt-1 text-sm font-medium text-foreground hover:text-primary">
-              Sharhlar
+            <Link to="/tech-personalities" className="inline-flex items-center px-1 pt-1 text-sm font-medium text-foreground hover:text-primary">
+              Mashhurlar
             </Link>
             <button
               onClick={scrollToFooter}
@@ -86,11 +86,11 @@ export function Navbar() {
               Dasturiy ta'minot
             </Link>
             <Link
-              to="/reviews"
+              to="/tech-personalities"
               className="block pl-3 pr-4 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent"
               onClick={() => setIsOpen(false)}
             >
-              Sharhlar
+              Mashhurlar
             </Link>
             <button
               onClick={scrollToFooter}

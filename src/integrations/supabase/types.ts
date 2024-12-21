@@ -63,6 +63,39 @@ export type Database = {
         }
         Relationships: []
       }
+      tech_personalities: {
+        Row: {
+          achievements: string
+          bio: string
+          created_at: string
+          id: string
+          image: string
+          name: string
+          role: string
+          slug: string
+        }
+        Insert: {
+          achievements: string
+          bio: string
+          created_at?: string
+          id?: string
+          image: string
+          name: string
+          role: string
+          slug: string
+        }
+        Update: {
+          achievements?: string
+          bio?: string
+          created_at?: string
+          id?: string
+          image?: string
+          name?: string
+          role?: string
+          slug?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

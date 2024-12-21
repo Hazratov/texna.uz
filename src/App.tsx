@@ -7,6 +7,8 @@ import { SeasonalBackground } from "@/components/SeasonalBackground";
 import Index from "./pages/Index";
 import ArticlePage from "./pages/ArticlePage";
 import AdminPage from "./pages/AdminPage";
+import TechPersonalitiesPage from "./pages/TechPersonalitiesPage";
+import TechPersonalityDetailPage from "./pages/TechPersonalityDetailPage";
 
 const queryClient = new QueryClient();
 
@@ -20,8 +22,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/category/:category" element={<Index />} />
-          <Route path="/reviews" element={<Index />} />
-          <Route path="/tips" element={<Index />} />
+          <Route path="/tech-personalities" element={<TechPersonalitiesPage />} />
+          <Route path="/tech-personality/:slug" element={<TechPersonalityDetailPage />} />
           <Route path="/article/:slug" element={<ArticlePage />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>

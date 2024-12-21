@@ -29,12 +29,15 @@ export function SubscriptionModal() {
           <p className="text-center text-gray-600">
             Eng so'nggi texnologik yangiliklar va qiziqarli ma'lumotlardan xabardor bo'lish uchun bizning kanalimizga obuna bo'ling!
           </p>
-          <button
+          <a
+            href="https://t.me/texna_uz"
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setOpen(false)}
             className="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/90 transition-colors"
           >
-            Yopish
-          </button>
+            Kanalga o'tish
+          </a>
         </div>
       </DialogContent>
     </Dialog>

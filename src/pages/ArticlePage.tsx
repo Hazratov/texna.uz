@@ -5,6 +5,8 @@ import { Footer } from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { ArticleHeader } from "@/components/article/ArticleHeader";
 import { ArticleImage } from "@/components/article/ArticleImage";
+import { ArticleContent } from "@/components/article/ArticleContent";
+import { ArticleMeta } from "@/components/article/ArticleMeta";
 import { RelatedArticles } from "@/components/article/RelatedArticles";
 import { SeasonalBackground } from "@/components/SeasonalBackground";
 import "../styles/seasonal.css";
@@ -37,7 +39,6 @@ const ArticlePage = () => {
 
         if (error) throw error;
         
-        // Default content for different categories
         if (!data) {
           if (slug === 'macbook-pro-16-2024') {
             setArticle({
@@ -293,14 +294,9 @@ Qo'shimcha xususiyatlar:
             created_at={article.created_at}
             source={article.source}
           />
+          <ArticleMeta created_at={article.created_at} />
           <ArticleImage image={article.image} title={article.title} />
-          <div className="prose prose-lg max-w-none">
-            {article.content.split('\n').map((paragraph, index) => (
-              <p key={index} className="mb-6 text-gray-700 leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
-          </div>
+          <ArticleContent content={article.content} category={article.category} />
           <RelatedArticles articles={relatedArticles} />
         </article>
       </main>

@@ -22,7 +22,7 @@ export function SubscriptionModal() {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-center text-xl font-bold">
-            Texna.uz Kanaliga obuna bo'ling
+            Texna.uz Telegram kanaliga obuna bo'ling
           </DialogTitle>
         </DialogHeader>
         <div className="flex flex-col items-center space-y-4 py-4">
@@ -30,7 +30,7 @@ export function SubscriptionModal() {
             Eng so'nggi texnologik yangiliklar va qiziqarli ma'lumotlardan xabardor bo'lish uchun bizning kanalimizga obuna bo'ling!
           </p>
           <a
-            href="https://t.me/texna_uz"
+            href="https://t.me/texna_uzb"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}

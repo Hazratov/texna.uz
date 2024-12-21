@@ -16,6 +16,9 @@ export function FeaturedArticle({ title, excerpt, image, slug }: FeaturedArticle
           <h2 className="text-3xl font-bold text-white mb-2">{title}</h2>
           <p className="text-gray-200">{excerpt}</p>
         </div>
+        <div className="absolute bottom-2 right-2 bg-white/90 px-2 py-1 text-black text-sm font-medium">
+          TEXNA.UZ
+        </div>
       </div>
     </Link>
   );

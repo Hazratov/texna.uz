@@ -6,6 +6,14 @@ import { ThemeToggle } from "./ThemeToggle";
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const scrollToFooter = () => {
+    const footer = document.querySelector('footer');
+    if (footer) {
+      footer.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  };
+
   return (
     <nav className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,9 +38,12 @@ export function Navbar() {
             <Link to="/reviews" className="inline-flex items-center px-1 pt-1 text-sm font-medium text-foreground hover:text-primary">
               Sharhlar
             </Link>
-            <Link to="/tips" className="inline-flex items-center px-1 pt-1 text-sm font-medium text-foreground hover:text-primary">
-              Maslahatlar
-            </Link>
+            <button
+              onClick={scrollToFooter}
+              className="inline-flex items-center px-1 pt-1 text-sm font-medium text-foreground hover:text-primary"
+            >
+              Bog'lanish
+            </button>
             <ThemeToggle />
           </div>
 
@@ -81,13 +92,12 @@ export function Navbar() {
             >
               Sharhlar
             </Link>
-            <Link
-              to="/tips"
-              className="block pl-3 pr-4 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent"
-              onClick={() => setIsOpen(false)}
+            <button
+              onClick={scrollToFooter}
+              className="block w-full text-left pl-3 pr-4 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-accent"
             >
-              Maslahatlar
-            </Link>
+              Bog'lanish
+            </button>
           </div>
         </div>
       )}

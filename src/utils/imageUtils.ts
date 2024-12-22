@@ -19,9 +19,20 @@ type SmartphoneImages = {
   default: string[];
 }
 
+type ComputerImages = {
+  mac: string;
+  macbook: string;
+  lenovo: string;
+  hp: string;
+  dell: string;
+  acer: string;
+  asus: string;
+  default: string[];
+}
+
 type CategoryImages = {
   smartphones: SmartphoneImages;
-  computers: string[];
+  computers: ComputerImages;
   software: SoftwareImages;
 }
 
@@ -40,15 +51,20 @@ export const categoryImages: CategoryImages = {
       "https://images.unsplash.com/photo-1598327105666-5b89351aff97"
     ]
   },
-  computers: [
-    "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
-    "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
-    "https://images.unsplash.com/photo-1537498425277-c283d32ef9db",
-    "https://images.unsplash.com/photo-1547082299-de196ea013d6",
-    "https://images.unsplash.com/photo-1593640495253-23196b27a87f",
-    "https://images.unsplash.com/photo-1602080858428-57174f9431cf",
-    "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed"
-  ],
+  computers: {
+    mac: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+    macbook: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+    lenovo: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
+    hp: "https://images.unsplash.com/photo-1537498425277-c283d32ef9db",
+    dell: "https://images.unsplash.com/photo-1593640495253-23196b27a87f",
+    acer: "https://images.unsplash.com/photo-1602080858428-57174f9431cf",
+    asus: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed",
+    default: [
+      "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
+      "https://images.unsplash.com/photo-1537498425277-c283d32ef9db"
+    ]
+  },
   software: {
     "windows-11": "https://pub-c2c1d9230f0b4abb9b0d2d95e06fd4ef.r2.dev/sites/620/2021/09/Hero-Bloom-Logo-800x533.jpg",
     "telegram-premium": "https://frankfurt.apollo.olxcdn.com/v1/files/8hciynkgzwlt-UZ/image",
@@ -62,6 +78,36 @@ export const categoryImages: CategoryImages = {
       "https://images.unsplash.com/photo-1607799279861-4dd421887fb3",
     ]
   }
+};
+
+const getImageForComputerArticle = (title: string, slug: string): string => {
+  const computers = categoryImages.computers;
+  const lowerTitle = title.toLowerCase();
+  const lowerSlug = slug.toLowerCase();
+
+  if (lowerTitle.includes('mac') || lowerSlug.includes('mac')) {
+    return computers.mac;
+  }
+  if (lowerTitle.includes('macbook') || lowerSlug.includes('macbook')) {
+    return computers.macbook;
+  }
+  if (lowerTitle.includes('lenovo') || lowerSlug.includes('lenovo')) {
+    return computers.lenovo;
+  }
+  if (lowerTitle.includes('hp') || lowerSlug.includes('hp')) {
+    return computers.hp;
+  }
+  if (lowerTitle.includes('dell') || lowerSlug.includes('dell')) {
+    return computers.dell;
+  }
+  if (lowerTitle.includes('acer') || lowerSlug.includes('acer')) {
+    return computers.acer;
+  }
+  if (lowerTitle.includes('asus') || lowerSlug.includes('asus')) {
+    return computers.asus;
+  }
+
+  return computers.default[0];
 };
 
 const getImageForSmartphoneArticle = (title: string, slug: string): string => {
@@ -95,31 +141,30 @@ const getImageForSmartphoneArticle = (title: string, slug: string): string => {
 };
 
 const getImageForSoftwareArticle = (title: string, slug: string): string => {
-  const softwareImages = categoryImages.software;
+  const software = categoryImages.software;
   const lowerTitle = title.toLowerCase();
-  
-  if (lowerTitle.includes('windows') || slug.includes('windows')) {
-    return softwareImages["windows-11"];
+  const lowerSlug = slug.toLowerCase();
+
+  if (lowerTitle.includes('windows') || lowerSlug.includes('windows')) {
+    return software["windows-11"];
   }
-  if (lowerTitle.includes('telegram') || slug.includes('telegram')) {
-    return softwareImages["telegram-premium"];
+  if (lowerTitle.includes('telegram') || lowerSlug.includes('telegram')) {
+    return software["telegram-premium"];
   }
-  if (lowerTitle.includes('gpt') || lowerTitle.includes('chatgpt') || slug.includes('gpt')) {
-    return softwareImages["chatgpt"];
+  if (lowerTitle.includes('gpt') || lowerSlug.includes('gpt')) {
+    return software.chatgpt;
   }
   if (lowerTitle.includes('vscode') || lowerTitle.includes('visual studio code')) {
-    return softwareImages["vscode"];
+    return software.vscode;
   }
-  if (lowerTitle.includes('android studio') || lowerTitle.includes('android-studio')) {
-    return softwareImages["android-studio"];
+  if (lowerTitle.includes('android studio')) {
+    return software["android-studio"];
   }
-  if (lowerTitle.includes('github') || slug.includes('github')) {
-    return softwareImages["github"];
+  if (lowerTitle.includes('github')) {
+    return software.github;
   }
 
-  const defaultImages = softwareImages.default;
-  const randomIndex = Math.floor(Math.random() * defaultImages.length);
-  return defaultImages[randomIndex];
+  return software.default[0];
 };
 
 export const getRandomImageForCategory = (category: string, title: string = '', slug: string = ''): string => {
@@ -127,16 +172,14 @@ export const getRandomImageForCategory = (category: string, title: string = '', 
     return getImageForSmartphoneArticle(title, slug);
   }
   
+  if (category === 'computers') {
+    return getImageForComputerArticle(title, slug);
+  }
+  
   if (category === 'software') {
     return getImageForSoftwareArticle(title, slug);
   }
 
-  const images = categoryImages[category as keyof typeof categoryImages];
-  
-  if (Array.isArray(images)) {
-    const randomIndex = Math.floor(Math.random() * images.length);
-    return images[randomIndex];
-  }
-
-  return categoryImages.smartphones.default[0];
+  // Default image if category doesn't match
+  return categoryImages.computers.default[0];
 };

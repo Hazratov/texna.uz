@@ -34,10 +34,10 @@ export const categoryImages: CategoryImages = {
     "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed"
   ],
   software: {
-    "windows-11": "https://images.unsplash.com/photo-1624571409108-e9d6c6436833",
-    "telegram-premium": "https://images.unsplash.com/photo-1636751364472-12bfad09b451",
-    "chatgpt": "https://images.unsplash.com/photo-1676320831562-1dd59d8cc5c4",
-    "vscode": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+    "windows-11": "https://pub-c2c1d9230f0b4abb9b0d2d95e06fd4ef.r2.dev/sites/620/2021/09/Hero-Bloom-Logo-800x533.jpg",
+    "telegram-premium": "https://frankfurt.apollo.olxcdn.com/v1/files/8hciynkgzwlt-UZ/image",
+    "chatgpt": "https://daryo.uz/static/2023/09/6512acda9e2bb.jpg",
+    "vscode": "https://miro.medium.com/v2/resize:fit:1012/1*vqugCcVCqfb-HSA0p-1Wiw.png",
     "android-studio": "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2",
     "github": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb",
     "default": [

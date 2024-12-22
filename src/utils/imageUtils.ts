@@ -8,22 +8,38 @@ type SoftwareImages = {
   default: string[];
 }
 
+type SmartphoneImages = {
+  iphone: string;
+  samsung: string;
+  xiaomi: string;
+  huawei: string;
+  realme: string;
+  poco: string;
+  oneplus: string;
+  default: string[];
+}
+
 type CategoryImages = {
-  smartphones: string[];
+  smartphones: SmartphoneImages;
   computers: string[];
   software: SoftwareImages;
 }
 
 export const categoryImages: CategoryImages = {
-  smartphones: [
-    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
-    "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd",
-    "https://images.unsplash.com/photo-1598327105666-5b89351aff97",
-    "https://api.2droida.ru/storage/products/633d58c56076b898a8adc50fa92aa7e2/3161/e5889671e8b8bb05bf1b04280ceb8e96.jpg",
-    "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb",
-    "https://kazandigital.ru/uploaded/files/df78duyrdhjf.jpg",
-    "https://openshop.fra1.cdn.digitaloceanspaces.com/public/uploads/products/photos/202405/ctQ3tyo0Cxm3GQM27LIILsDfAAba2Xdj9fDVilV4.jpg"
-  ],
+  smartphones: {
+    iphone: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a",
+    samsung: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c",
+    xiaomi: "https://images.unsplash.com/photo-1598327105666-5b89351aff97",
+    huawei: "https://images.unsplash.com/photo-1595941069915-4ebc5197c14a",
+    realme: "https://images.unsplash.com/photo-1610945264803-c22b62d2a7b3",
+    poco: "https://images.unsplash.com/photo-1598524374912-6b0b0bdd0b09",
+    oneplus: "https://images.unsplash.com/photo-1637786698427-6b6da8b9b855",
+    default: [
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+      "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd",
+      "https://images.unsplash.com/photo-1598327105666-5b89351aff97"
+    ]
+  },
   computers: [
     "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
     "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
@@ -48,13 +64,37 @@ export const categoryImages: CategoryImages = {
   }
 };
 
-const usedImages: { [key: string]: Set<string> } = {
-  smartphones: new Set(),
-  computers: new Set(),
-  software: new Set()
+const getImageForSmartphoneArticle = (title: string, slug: string): string => {
+  const smartphones = categoryImages.smartphones;
+  const lowerTitle = title.toLowerCase();
+  const lowerSlug = slug.toLowerCase();
+
+  if (lowerTitle.includes('iphone') || lowerSlug.includes('iphone')) {
+    return smartphones.iphone;
+  }
+  if (lowerTitle.includes('samsung') || lowerSlug.includes('samsung')) {
+    return smartphones.samsung;
+  }
+  if (lowerTitle.includes('xiaomi') || lowerSlug.includes('xiaomi')) {
+    return smartphones.xiaomi;
+  }
+  if (lowerTitle.includes('huawei') || lowerSlug.includes('huawei')) {
+    return smartphones.huawei;
+  }
+  if (lowerTitle.includes('realme') || lowerSlug.includes('realme')) {
+    return smartphones.realme;
+  }
+  if (lowerTitle.includes('poco') || lowerSlug.includes('poco')) {
+    return smartphones.poco;
+  }
+  if (lowerTitle.includes('oneplus') || lowerSlug.includes('oneplus')) {
+    return smartphones.oneplus;
+  }
+
+  return smartphones.default[0];
 };
 
-export const getImageForSoftwareArticle = (title: string, slug: string): string => {
+const getImageForSoftwareArticle = (title: string, slug: string): string => {
   const softwareImages = categoryImages.software;
   const lowerTitle = title.toLowerCase();
   
@@ -83,6 +123,10 @@ export const getImageForSoftwareArticle = (title: string, slug: string): string 
 };
 
 export const getRandomImageForCategory = (category: string, title: string = '', slug: string = ''): string => {
+  if (category === 'smartphones') {
+    return getImageForSmartphoneArticle(title, slug);
+  }
+  
   if (category === 'software') {
     return getImageForSoftwareArticle(title, slug);
   }
@@ -90,21 +134,9 @@ export const getRandomImageForCategory = (category: string, title: string = '', 
   const images = categoryImages[category as keyof typeof categoryImages];
   
   if (Array.isArray(images)) {
-    const usedImagesForCategory = usedImages[category] || new Set();
-
-    if (usedImagesForCategory.size >= images.length) {
-      usedImagesForCategory.clear();
-    }
-
-    const availableImages = images.filter(img => !usedImagesForCategory.has(img));
-    const randomIndex = Math.floor(Math.random() * availableImages.length);
-    const selectedImage = availableImages[randomIndex];
-    
-    usedImagesForCategory.add(selectedImage);
-    usedImages[category] = usedImagesForCategory;
-
-    return selectedImage;
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
   }
 
-  return categoryImages.software.default[0];
+  return categoryImages.smartphones.default[0];
 };

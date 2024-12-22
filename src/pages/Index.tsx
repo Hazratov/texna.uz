@@ -18,8 +18,24 @@ interface Article {
   created_at: string;
 }
 
+type SoftwareImages = {
+  "windows-11": string;
+  "telegram-premium": string;
+  chatgpt: string;
+  vscode: string;
+  "android-studio": string;
+  github: string;
+  default: string[];
+}
+
+type CategoryImages = {
+  smartphones: string[];
+  computers: string[];
+  software: SoftwareImages;
+}
+
 // Category-specific placeholder images with more options
-const categoryImages = {
+const categoryImages: CategoryImages = {
   smartphones: [
     "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
     "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd",
@@ -39,16 +55,16 @@ const categoryImages = {
     "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed"
   ],
   software: {
-    "windows-11": "https://images.unsplash.com/photo-1624571409108-e9d6c6436833", // Windows 11 specific
-    "telegram-premium": "https://images.unsplash.com/photo-1636751364472-12bfad09b451", // Messaging app UI
-    "chatgpt": "https://images.unsplash.com/photo-1676320831562-1dd59d8cc5c4", // AI/ML visualization
-    "vscode": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6", // Code editor
-    "android-studio": "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2", // Mobile development
-    "github": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb", // Version control
+    "windows-11": "https://images.unsplash.com/photo-1624571409108-e9d6c6436833",
+    "telegram-premium": "https://images.unsplash.com/photo-1636751364472-12bfad09b451",
+    "chatgpt": "https://images.unsplash.com/photo-1676320831562-1dd59d8cc5c4",
+    "vscode": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+    "android-studio": "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2",
+    "github": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb",
     "default": [
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c", // Clean code
-      "https://images.unsplash.com/photo-1516116216624-53e697fedbea", // Programming workspace
-      "https://images.unsplash.com/photo-1607799279861-4dd421887fb3", // Software architecture
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
+      "https://images.unsplash.com/photo-1516116216624-53e697fedbea",
+      "https://images.unsplash.com/photo-1607799279861-4dd421887fb3",
     ]
   }
 };
@@ -60,7 +76,7 @@ const usedImages: { [key: string]: Set<string> } = {
   software: new Set()
 };
 
-const getImageForSoftwareArticle = (title: string, slug: string) => {
+const getImageForSoftwareArticle = (title: string, slug: string): string => {
   const softwareImages = categoryImages.software;
   const lowerTitle = title.toLowerCase();
   
@@ -90,31 +106,40 @@ const getImageForSoftwareArticle = (title: string, slug: string) => {
   return defaultImages[randomIndex];
 };
 
-const getRandomImageForCategory = (category: string, title: string = '', slug: string = '') => {
+const getRandomImageForCategory = (category: string, title: string = '', slug: string = ''): string => {
   if (category === 'software') {
     return getImageForSoftwareArticle(title, slug);
   }
 
   const images = categoryImages[category as keyof typeof categoryImages] || categoryImages.software.default;
-  const usedImagesForCategory = usedImages[category] || new Set();
+  
+  // Handle array type images (smartphones and computers categories)
+  if (Array.isArray(images)) {
+    const usedImagesForCategory = usedImages[category] || new Set();
 
-  // Reset used images if all images for this category have been used
-  if (usedImagesForCategory.size >= images.length) {
-    usedImagesForCategory.clear();
+    // Reset used images if all images for this category have been used
+    if (usedImagesForCategory.size >= images.length) {
+      usedImagesForCategory.clear();
+    }
+
+    // Filter out already used images
+    const availableImages = images.filter(img => !usedImagesForCategory.has(img));
+    
+    // Get random image from available images
+    const randomIndex = Math.floor(Math.random() * availableImages.length);
+    const selectedImage = availableImages[randomIndex];
+    
+    // Mark image as used
+    usedImagesForCategory.add(selectedImage);
+    usedImages[category] = usedImagesForCategory;
+
+    return selectedImage;
   }
 
-  // Filter out already used images
-  const availableImages = images.filter(img => !usedImagesForCategory.has(img));
-  
-  // Get random image from available images
-  const randomIndex = Math.floor(Math.random() * availableImages.length);
-  const selectedImage = availableImages[randomIndex];
-  
-  // Mark image as used
-  usedImagesForCategory.add(selectedImage);
-  usedImages[category] = usedImagesForCategory;
-
-  return selectedImage;
+  // Fallback to default software images if category is not found
+  const defaultImages = categoryImages.software.default;
+  const randomIndex = Math.floor(Math.random() * defaultImages.length);
+  return defaultImages[randomIndex];
 };
 
 const Index = () => {

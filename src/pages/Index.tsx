@@ -39,13 +39,16 @@ const categoryImages = {
     "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed"
   ],
   software: [
-    "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
-    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
-    "https://images.unsplash.com/photo-1516116216624-53e697fedbea",
-    "https://images.unsplash.com/photo-1504639725590-34d0984388bd",
-    "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2",
-    "https://images.unsplash.com/photo-1623479322729-28b25c16b011",
-    "https://images.unsplash.com/photo-1607799279861-4dd421887fb3"
+    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6", // Code editor with syntax highlighting
+    "https://images.unsplash.com/photo-1555066931-4365d14bab8c", // Clean code on screen
+    "https://images.unsplash.com/photo-1516116216624-53e697fedbea", // Modern programming workspace
+    "https://images.unsplash.com/photo-1603380353725-f8a4d39cc41e", // Software development team
+    "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2", // Mobile app development
+    "https://images.unsplash.com/photo-1623479322729-28b25c16b011", // Web development
+    "https://images.unsplash.com/photo-1607799279861-4dd421887fb3", // Software architecture
+    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97", // Clean coding environment
+    "https://images.unsplash.com/photo-1542831371-29b0f74f9713", // Software debugging
+    "https://images.unsplash.com/photo-1504639725590-34d0984388bd", // Software testing
   ]
 };
 

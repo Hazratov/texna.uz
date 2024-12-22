@@ -19,10 +19,10 @@ export const categoryImages: CategoryImages = {
     "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
     "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd",
     "https://images.unsplash.com/photo-1598327105666-5b89351aff97",
-    "https://images.unsplash.com/photo-1585060544812-6b45742d762f",
+    "https://api.2droida.ru/storage/products/633d58c56076b898a8adc50fa92aa7e2/3161/e5889671e8b8bb05bf1b04280ceb8e96.jpg",
     "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb",
-    "https://images.unsplash.com/photo-1567581935884-3349723552ca",
-    "https://images.unsplash.com/photo-1523206489230-c012c64b2b48"
+    "https://kazandigital.ru/uploaded/files/df78duyrdhjf.jpg",
+    "https://openshop.fra1.cdn.digitaloceanspaces.com/public/uploads/products/photos/202405/ctQ3tyo0Cxm3GQM27LIILsDfAAba2Xdj9fDVilV4.jpg"
   ],
   computers: [
     "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",

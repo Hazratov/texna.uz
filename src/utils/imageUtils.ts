@@ -38,44 +38,44 @@ type CategoryImages = {
 
 export const categoryImages: CategoryImages = {
   smartphones: {
-    iphone: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    samsung: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    xiaomi: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    huawei: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    realme: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    poco: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    oneplus: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
+    iphone: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a",
+    samsung: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c",
+    xiaomi: "https://images.unsplash.com/photo-1598327105666-5b89351aff97",
+    huawei: "https://images.unsplash.com/photo-1595941069915-4ebc5197c14a",
+    realme: "https://images.unsplash.com/photo-1610945264803-c22b62d2a7b3",
+    poco: "https://images.unsplash.com/photo-1598524374912-6b0b0bdd0b09",
+    oneplus: "https://images.unsplash.com/photo-1637786698427-6b6da8b9b855",
     default: [
-      "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-      "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-      "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png"
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+      "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd",
+      "https://images.unsplash.com/photo-1598327105666-5b89351aff97"
     ]
   },
   computers: {
-    mac: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    macbook: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    lenovo: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    hp: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    dell: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    acer: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    asus: "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
+    mac: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+    macbook: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+    lenovo: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
+    hp: "https://images.unsplash.com/photo-1537498425277-c283d32ef9db",
+    dell: "https://images.unsplash.com/photo-1593640495253-23196b27a87f",
+    acer: "https://images.unsplash.com/photo-1602080858428-57174f9431cf",
+    asus: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed",
     default: [
-      "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-      "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-      "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png"
+      "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
+      "https://images.unsplash.com/photo-1537498425277-c283d32ef9db"
     ]
   },
   software: {
-    "windows-11": "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    "telegram-premium": "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    "chatgpt": "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    "vscode": "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    "android-studio": "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-    "github": "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
+    "windows-11": "https://pub-c2c1d9230f0b4abb9b0d2d95e06fd4ef.r2.dev/sites/620/2021/09/Hero-Bloom-Logo-800x533.jpg",
+    "telegram-premium": "https://frankfurt.apollo.olxcdn.com/v1/files/8hciynkgzwlt-UZ/image",
+    "chatgpt": "https://daryo.uz/static/2023/09/6512acda9e2bb.jpg",
+    "vscode": "https://miro.medium.com/v2/resize:fit:1012/1*vqugCcVCqfb-HSA0p-1Wiw.png",
+    "android-studio": "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2",
+    "github": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb",
     "default": [
-      "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-      "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
-      "/lovable-uploads/988bb3bb-65f4-4e86-9a34-7e7dc8578305.png",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
+      "https://images.unsplash.com/photo-1516116216624-53e697fedbea",
+      "https://images.unsplash.com/photo-1607799279861-4dd421887fb3",
     ]
   }
 };
@@ -180,5 +180,6 @@ export const getRandomImageForCategory = (category: string, title: string = '', 
     return getImageForSoftwareArticle(title, slug);
   }
 
+  // Default image if category doesn't match
   return categoryImages.computers.default[0];
 };

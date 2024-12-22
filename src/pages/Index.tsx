@@ -38,18 +38,19 @@ const categoryImages = {
     "https://images.unsplash.com/photo-1602080858428-57174f9431cf",
     "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed"
   ],
-  software: [
-    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6", // Code editor with syntax highlighting
-    "https://images.unsplash.com/photo-1555066931-4365d14bab8c", // Clean code on screen
-    "https://images.unsplash.com/photo-1516116216624-53e697fedbea", // Modern programming workspace
-    "https://images.unsplash.com/photo-1603380353725-f8a4d39cc41e", // Software development team
-    "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2", // Mobile app development
-    "https://images.unsplash.com/photo-1623479322729-28b25c16b011", // Web development
-    "https://images.unsplash.com/photo-1607799279861-4dd421887fb3", // Software architecture
-    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97", // Clean coding environment
-    "https://images.unsplash.com/photo-1542831371-29b0f74f9713", // Software debugging
-    "https://images.unsplash.com/photo-1504639725590-34d0984388bd", // Software testing
-  ]
+  software: {
+    "windows-11": "https://images.unsplash.com/photo-1624571409108-e9d6c6436833", // Windows 11 specific
+    "telegram-premium": "https://images.unsplash.com/photo-1636751364472-12bfad09b451", // Messaging app UI
+    "chatgpt": "https://images.unsplash.com/photo-1676320831562-1dd59d8cc5c4", // AI/ML visualization
+    "vscode": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6", // Code editor
+    "android-studio": "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2", // Mobile development
+    "github": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb", // Version control
+    "default": [
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c", // Clean code
+      "https://images.unsplash.com/photo-1516116216624-53e697fedbea", // Programming workspace
+      "https://images.unsplash.com/photo-1607799279861-4dd421887fb3", // Software architecture
+    ]
+  }
 };
 
 // Keep track of used images per category
@@ -59,8 +60,42 @@ const usedImages: { [key: string]: Set<string> } = {
   software: new Set()
 };
 
-const getRandomImageForCategory = (category: string) => {
-  const images = categoryImages[category as keyof typeof categoryImages] || categoryImages.software;
+const getImageForSoftwareArticle = (title: string, slug: string) => {
+  const softwareImages = categoryImages.software;
+  const lowerTitle = title.toLowerCase();
+  
+  // Check for specific software mentions in the title or slug
+  if (lowerTitle.includes('windows') || slug.includes('windows')) {
+    return softwareImages["windows-11"];
+  }
+  if (lowerTitle.includes('telegram') || slug.includes('telegram')) {
+    return softwareImages["telegram-premium"];
+  }
+  if (lowerTitle.includes('gpt') || lowerTitle.includes('chatgpt') || slug.includes('gpt')) {
+    return softwareImages["chatgpt"];
+  }
+  if (lowerTitle.includes('vscode') || lowerTitle.includes('visual studio code')) {
+    return softwareImages["vscode"];
+  }
+  if (lowerTitle.includes('android studio') || lowerTitle.includes('android-studio')) {
+    return softwareImages["android-studio"];
+  }
+  if (lowerTitle.includes('github') || slug.includes('github')) {
+    return softwareImages["github"];
+  }
+
+  // If no specific match, use a default image
+  const defaultImages = softwareImages.default;
+  const randomIndex = Math.floor(Math.random() * defaultImages.length);
+  return defaultImages[randomIndex];
+};
+
+const getRandomImageForCategory = (category: string, title: string = '', slug: string = '') => {
+  if (category === 'software') {
+    return getImageForSoftwareArticle(title, slug);
+  }
+
+  const images = categoryImages[category as keyof typeof categoryImages] || categoryImages.software.default;
   const usedImagesForCategory = usedImages[category] || new Set();
 
   // Reset used images if all images for this category have been used
@@ -127,10 +162,10 @@ const Index = () => {
       // Reset used images when fetching new articles
       Object.values(usedImages).forEach(set => set.clear());
       
-      // Assign unique random category-specific images to articles
+      // Assign specific images based on article content
       const articlesWithImages = (data || []).map(article => ({
         ...article,
-        image: getRandomImageForCategory(article.category)
+        image: getRandomImageForCategory(article.category, article.title, article.slug)
       }));
       
       setArticles(articlesWithImages);

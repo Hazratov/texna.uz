@@ -7,8 +7,17 @@ export function useTheme() {
 
   useEffect(() => {
     const root = window.document.documentElement;
+    const body = window.document.body;
+    
+    // Remove both themes from root and body
     root.classList.remove("light", "dark");
+    body.classList.remove("light", "dark");
+    
+    // Add theme to both root and body
     root.classList.add(theme);
+    body.classList.add(theme);
+    
+    // Store theme preference
     localStorage.setItem("theme", theme);
   }, [theme]);
 

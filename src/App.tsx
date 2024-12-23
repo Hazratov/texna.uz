@@ -9,12 +9,16 @@ import ArticlePage from "./pages/ArticlePage";
 import AdminPage from "./pages/AdminPage";
 import TechPersonalitiesPage from "./pages/TechPersonalitiesPage";
 import TechPersonalityDetailPage from "./pages/TechPersonalityDetailPage";
+import { useTheme } from "@/hooks/use-theme";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+const AppContent = () => {
+  // Initialize theme
+  useTheme();
+
+  return (
+    <>
       <SeasonalBackground />
       <Toaster />
       <Sonner />
@@ -28,6 +32,14 @@ const App = () => (
           <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </BrowserRouter>
+    </>
+  );
+};
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <AppContent />
     </TooltipProvider>
   </QueryClientProvider>
 );

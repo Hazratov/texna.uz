@@ -3,10 +3,12 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { LoginForm } from "@/components/admin/LoginForm";
+import { ArticleList } from "@/components/admin/ArticleList";
 import { ArticleForm } from "@/components/admin/ArticleForm";
 
 const AdminPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
 
   if (!isLoggedIn) {
     return (
@@ -24,19 +26,27 @@ const AdminPage = () => {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
       <main className="flex-grow">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900">
-              Yangi maqola yaratish
+              {isCreating ? "Yangi maqola yaratish" : "Maqolalar"}
             </h1>
-            <Button 
-              variant="outline"
-              onClick={() => setIsLoggedIn(false)}
-            >
-              Chiqish
-            </Button>
+            <div className="space-x-4">
+              <Button 
+                variant={isCreating ? "outline" : "default"}
+                onClick={() => setIsCreating(!isCreating)}
+              >
+                {isCreating ? "Maqolalar ro'yxati" : "Yangi maqola"}
+              </Button>
+              <Button 
+                variant="outline"
+                onClick={() => setIsLoggedIn(false)}
+              >
+                Chiqish
+              </Button>
+            </div>
           </div>
-          <ArticleForm />
+          {isCreating ? <ArticleForm /> : <ArticleList />}
         </div>
       </main>
       <Footer />

@@ -80,7 +80,7 @@ const Index = () => {
   const featuredArticle = latestArticles[0] || articles[0];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Navbar />
       <SubscriptionModal />
       <main className="flex-grow">

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Button } from "@/components/ui/button";
 import { LoginForm } from "@/components/admin/LoginForm";
 import { ArticleForm } from "@/components/admin/ArticleForm";
 
@@ -29,12 +28,12 @@ const AdminPage = () => {
             <h1 className="text-3xl font-bold text-gray-900">
               Yangi maqola yaratish
             </h1>
-            <Button 
-              variant="outline"
+            <button 
               onClick={() => setIsLoggedIn(false)}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
             >
               Chiqish
-            </Button>
+            </button>
           </div>
           <ArticleForm />
         </div>

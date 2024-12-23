@@ -100,7 +100,7 @@ export function ArticleForm() {
       
       toast.success("Maqola muvaffaqiyatli saqlandi!");
       
-      // Formani tozalash
+      // Reset form
       setFormData({
         title: "",
         excerpt: "",

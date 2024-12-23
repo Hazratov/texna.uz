@@ -52,8 +52,8 @@ export const categoryImages: CategoryImages = {
     ]
   },
   computers: {
-    mac: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
-    macbook: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+    mac: "https://www.notebookcheck-ru.com/fileadmin/Notebooks/Apple/MacBook_Pro_16_2023_M3_Pro/IMG_1241.JPG",
+    macbook: "https://static.insales-cdn.com/files/1/2643/23415379/original/hero_intro_endframe__e6khcva4hkeq_large.jpg",
     lenovo: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
     hp: "https://images.unsplash.com/photo-1537498425277-c283d32ef9db",
     dell: "https://images.unsplash.com/photo-1593640495253-23196b27a87f",

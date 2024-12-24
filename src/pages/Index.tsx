@@ -84,7 +84,7 @@ const Index = () => {
       <Navbar />
       <SubscriptionModal />
       <main className="flex-grow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="container mx-auto px-4 py-8">
           {location.pathname === "/" && featuredArticle && (
             <div className="mb-12">
               <FeaturedArticle {...featuredArticle} />
@@ -94,7 +94,7 @@ const Index = () => {
           {location.pathname === "/" && latestArticles.length > 0 && (
             <>
               <h2 className="text-2xl font-bold mb-6">So'nggi 24 soat ichidagi yangiliklar</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                 {latestArticles.slice(1).map((article) => (
                   <ArticleCard key={article.id} {...article} />
                 ))}
@@ -105,7 +105,7 @@ const Index = () => {
           <h2 className="text-2xl font-bold mb-6">
             {category ? `${category.charAt(0).toUpperCase() + category.slice(1)} bo'yicha maqolalar` : "Barcha maqolalar"}
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {articles
               .filter(article => !category || article.category === category)
               .map((article) => (

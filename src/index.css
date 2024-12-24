@@ -59,5 +59,9 @@
 }
 
 .article-card {
-  @apply transition-transform duration-200 hover:scale-[1.02];
+  @apply transition-all duration-200;
+}
+
+.article-card:hover {
+  @apply transform scale-[1.02];
 }

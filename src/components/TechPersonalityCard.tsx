@@ -9,9 +9,9 @@ interface TechPersonalityCardProps {
 
 export function TechPersonalityCard({ name, role, image, slug }: TechPersonalityCardProps) {
   return (
-    <Link to={`/tech-personality/${slug}`} className="block">
-      <div className="bg-card rounded-lg shadow-sm overflow-hidden transition-transform hover:scale-105 dark:bg-card">
-        <div className="relative h-64">
+    <Link to={`/tech-personality/${slug}`} className="block h-full">
+      <div className="bg-card rounded-lg shadow-sm overflow-hidden h-full transition-all duration-200 hover:shadow-lg hover:scale-[1.02] dark:bg-card dark:border dark:border-border">
+        <div className="relative aspect-[4/3]">
           <img 
             src={image} 
             alt={name} 
@@ -23,8 +23,12 @@ export function TechPersonalityCard({ name, role, image, slug }: TechPersonality
           />
         </div>
         <div className="p-4">
-          <h3 className="text-xl font-semibold text-foreground">{name}</h3>
-          <p className="mt-1 text-sm text-muted-foreground">{role}</p>
+          <h3 className="text-xl font-semibold text-foreground hover:text-primary transition-colors">
+            {name}
+          </h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {role}
+          </p>
         </div>
       </div>
     </Link>

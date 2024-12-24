@@ -15,7 +15,7 @@ export default function TechPersonalityDetailPage() {
         .from("tech_personalities")
         .select("*")
         .eq("slug", slug)
-        .maybeSingle();
+        .single();
       
       if (error) throw error;
       return data;

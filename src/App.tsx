@@ -1,41 +1,47 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { SeasonalBackground } from "@/components/SeasonalBackground";
 import Index from "./pages/Index";
 import ArticlePage from "./pages/ArticlePage";
 import AdminPage from "./pages/AdminPage";
-import DailyNewsPage from "./pages/DailyNewsPage";
-import DailyNewsDetailPage from "./pages/DailyNewsDetailPage";
-import AdminDailyNewsPage from "./pages/AdminDailyNewsPage";
 import TechPersonalitiesPage from "./pages/TechPersonalitiesPage";
 import TechPersonalityDetailPage from "./pages/TechPersonalityDetailPage";
+import { useTheme } from "@/hooks/use-theme";
 
-// Create a client
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      retry: 1,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
-function App() {
+const AppContent = () => {
+  // Initialize theme
+  useTheme();
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
+    <>
+      <SeasonalBackground />
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/category/:category" element={<Index />} />
+          <Route path="/tech-personalities" element={<TechPersonalitiesPage />} />
+          <Route path="/tech-personality/:slug" element={<TechPersonalityDetailPage />} />
           <Route path="/article/:slug" element={<ArticlePage />} />
           <Route path="/admin" element={<AdminPage />} />
-          <Route path="/admin/daily-news" element={<AdminDailyNewsPage />} />
-          <Route path="/daily-news" element={<DailyNewsPage />} />
-          <Route path="/daily-news/:slug" element={<DailyNewsDetailPage />} />
-          <Route path="/tech-personalities" element={<TechPersonalitiesPage />} />
-          <Route path="/tech-personalities/:slug" element={<TechPersonalityDetailPage />} />
         </Routes>
-      </Router>
-    </QueryClientProvider>
+      </BrowserRouter>
+    </>
   );
-}
+};
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <AppContent />
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;

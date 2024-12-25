@@ -11,7 +11,14 @@ import TechPersonalitiesPage from "./pages/TechPersonalitiesPage";
 import TechPersonalityDetailPage from "./pages/TechPersonalityDetailPage";
 import { useTheme } from "@/hooks/use-theme";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const AppContent = () => {
   // Initialize theme
@@ -22,7 +29,7 @@ const AppContent = () => {
       <SeasonalBackground />
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/category/:category" element={<Index />} />

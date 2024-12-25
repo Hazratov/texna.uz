@@ -116,6 +116,33 @@ export type Database = {
         }
         Relationships: []
       }
+      daily_news: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          image: string
+          slug: string
+          title: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          image: string
+          slug: string
+          title: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          image?: string
+          slug?: string
+          title?: string
+        }
+        Relationships: []
+      }
       order_items: {
         Row: {
           created_at: string | null

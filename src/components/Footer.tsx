@@ -27,6 +27,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/category/software" className="text-gray-400 hover:text-white">
+                  Dasturiy ta'minot
+                </Link>
+              </li>
+              <li>
                 <Link to="/tech-personalities" className="text-gray-400 hover:text-white">
                   Mashhurlar
                 </Link>

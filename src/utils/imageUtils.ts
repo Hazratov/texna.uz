@@ -65,6 +65,7 @@ export const categoryImages: CategoryImages = {
       "https://images.unsplash.com/photo-1537498425277-c283d32ef9db"
     ]
   },
+  
   software: {
     "windows-11": "https://pub-c2c1d9230f0b4abb9b0d2d95e06fd4ef.r2.dev/sites/620/2021/09/Hero-Bloom-Logo-800x533.jpg",
     "telegram-premium": "https://frankfurt.apollo.olxcdn.com/v1/files/8hciynkgzwlt-UZ/image",

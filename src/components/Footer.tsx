@@ -27,13 +27,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/reviews" className="text-gray-400 hover:text-white">
-                  Sharhlar
-                </Link>
-              </li>
-              <li>
-                <Link to="/tips" className="text-gray-400 hover:text-white">
-                  Maslahatlar
+                <Link to="/tech-personalities" className="text-gray-400 hover:text-white">
+                  Mashhurlar
                 </Link>
               </li>
             </ul>
